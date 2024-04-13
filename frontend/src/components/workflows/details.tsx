@@ -56,22 +56,25 @@ export function WorkflowDetails() {
     <>
       <div className="h-full w-full">
         <ResizablePanelGroup direction="horizontal">
-          <ResizablePanel>
-              <WorkflowEditor hazelNodes={hazelNodes} />
+          <ResizablePanel defaultSize={80}>
+            <WorkflowEditor hazelNodes={hazelNodes} />
           </ResizablePanel>
-          <ResizableHandle />
-          <ResizablePanel>
-            Sidebar
+          <ResizableHandle withHandle />
+          <ResizablePanel defaultSize={20}>
+            <strong>{workflowDoc.data.title}</strong>
+
+            <ul>
+              <li>{workflowDoc.data.trigger_type}</li>
+            </ul>
+
+            <p>Sidebar</p>
+
+            <Button color="rose" onClick={handleDeleteWorkflow}>
+              Delete Workflow
+            </Button>
           </ResizablePanel>
         </ResizablePanelGroup>
-
-
       </div>
     </>
   );
 }
-
-// LATER:
-// <Button color="rose" onClick={handleDeleteWorkflow}>
-//             Delete Workflow
-//  </Button>

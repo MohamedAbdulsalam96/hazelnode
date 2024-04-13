@@ -7,11 +7,6 @@ import {
   useSuspenseQuery,
 } from '@tanstack/react-query';
 
-type FilterObject<DT> = Record<
-  keyof DT,
-  number | string | Array<string | number>
->; // TODO: can be more granular later
-
 type DocTypeName =
   | 'Hazel Node'
   | 'Hazel Workflow'
@@ -20,8 +15,8 @@ type DocTypeName =
 
 export interface DocTypeQueryParams<DT> {
   fields?: ReadonlyArray<keyof DT> | '*';
-  filters?: FilterObject<DT>;
-  or_filters?: FilterObject<DT>;
+  filters?: Partial<DT>;
+  or_filters?: Partial<DT>;
   limit?: number;
   limit_start?: number;
   start?: number;
@@ -59,7 +54,10 @@ export function getListQueryOptions<DT>(
       return makeRequest({
         type: 'document',
         path: doctype,
-        params: { ...params, fields: JSON.stringify(params.fields) },
+        params: {
+          ...params,
+          fields: JSON.stringify(params.fields),
+        },
       });
     },
     enabled: !!params,

@@ -1,43 +1,87 @@
-import { Handle, NodeProps, Position } from 'reactflow';
-import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { PlusCircleIcon } from 'lucide-react';
+
 import {
   Dialog,
-  DialogActions,
   DialogBody,
   DialogDescription,
   DialogTitle,
 } from '@/components/ui/dialog';
 import { useState } from 'react';
+import { DocTypeQueryParams, useDocType } from '@/queries/frappe';
+import { Skeleton } from '../ui/skeleton';
+import { toast } from 'sonner';
 
-export default function AddNewNode({ selected }: NodeProps<HazelNode>) {
+export default function AddNewNode() {
   const [showDialog, setShowDialog] = useState(false);
+
+  const { useList } = useDocType<HazelNodeType>('Hazel Node Type');
+  const { useSetValueMutation } = useDocType<HazelWorkflow>('Hazel Workflow');
+
+  const setValue = useSetValueMutation();
+
+  function setTrigger(trigger: HazelNodeType) {
+    setValue.mutate(
+      {
+        name: '26',
+        values: {
+          trigger_type: trigger.name,
+        },
+      },
+      {
+        onSuccess() {
+          setShowDialog(false);
+          toast.success("Trigger set successfully!")
+        },
+      },
+    );
+  }
+
+  const triggerListParams: DocTypeQueryParams<HazelNodeType> = {
+    filters: {
+      kind: 'Trigger',
+    },
+    fields: ['name', 'description', 'preview_image'],
+  };
+
+  const triggerNodesList = useList(triggerListParams);
+
+  if (triggerNodesList.isLoading) {
+    return <Skeleton></Skeleton>;
+  }
+
+  if (triggerNodesList.isError) {
+    return <div>Error occurred loading triggers!</div>;
+  }
+
   return (
     <>
-      <Card
-        className={selected ? 'border-2 border-lime-400/80' : ''}
-        style={{ minWidth: '24rem' }}
+      <Button
+        color="lime"
+        className="cursor-default"
+        onClick={() => setShowDialog(true)}
       >
         <div className="grid place-content-center py-2">
-          <Button plain onClick={() => setShowDialog(true)}>
-            <PlusCircleIcon />
-          </Button>
+          <span>Set a trigger</span>
         </div>
-      </Card>
-      <Handle type="target" position={Position.Top} />
+      </Button>
       <Dialog open={showDialog} onClose={setShowDialog} size="3xl">
-        <DialogTitle>Add Action</DialogTitle>
+        <DialogTitle>Select a trigger</DialogTitle>
         <DialogDescription>
-          Choose a node to add to your workflow
+          The event that will trigger a run of this workflow
         </DialogDescription>
-        <DialogBody></DialogBody>
-        <DialogActions>
-          <Button onClick={() => setShowDialog(false)} outline>
-            Cancel
-          </Button>
-          <Button color="lime">Add</Button>
-        </DialogActions>
+        <DialogBody>
+          <ol>
+            {triggerNodesList.data?.map((trigger) => {
+              return (
+                <li>
+                  <Button onClick={() => setTrigger(trigger)} color="fuchsia">
+                    {trigger.name}
+                  </Button>
+                </li>
+              );
+            })}
+          </ol>
+        </DialogBody>
       </Dialog>
     </>
   );

@@ -24,6 +24,10 @@ export async function makeRequest(options: APIRequestOptions) {
     options.method = 'GET';
   }
 
+  if (options.params?.filters) {
+    options.params.filters = JSON.stringify(options.params.filters);
+  }
+
   let url = `/api/v2/${options.type}/${options.path}`;
   let body;
 
