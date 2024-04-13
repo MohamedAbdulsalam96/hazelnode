@@ -1,5 +1,7 @@
-import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import { useState } from 'react';
+
+import { Button } from '@/components/ui/button';
 import { useConfirm } from '@/hooks/confirm';
 import { useDocType } from '@/queries/frappe';
 import { useNavigate } from '@tanstack/react-router';
@@ -13,6 +15,7 @@ import {
 import { Route as WorkflowDetailsRoute } from '@/routes/workflow.$id';
 
 import WorkflowEditor from './editor';
+import SetTriggerDialog from '@/components/workflows/set-trigger-dialog';
 
 export function WorkflowDetails() {
   const params = WorkflowDetailsRoute.useParams();
@@ -23,6 +26,8 @@ export function WorkflowDetails() {
     useDocType<HazelWorkflow>('Hazel Workflow');
   const workflowDoc = useSuspenseDoc(params.id);
   const deleteWorkflowMutation = useDeleteDocMutation();
+
+  const [updateTriggerDialogOpen, setUpdateTriggerDialogOpen] = useState(false);
 
   async function handleDeleteWorkflow() {
     const deleteConfirmed = await confirm({
@@ -64,10 +69,21 @@ export function WorkflowDetails() {
             <strong>{workflowDoc.data.title}</strong>
 
             <ul>
-              <li>{workflowDoc.data.trigger_type}</li>
+              <li>
+                Trigger: {workflowDoc.data.trigger_type}{' '}
+                <Button
+                  plain={true}
+                  outline={true}
+                  onClick={() => setUpdateTriggerDialogOpen(true)}
+                >
+                  Change
+                </Button>
+                <SetTriggerDialog
+                  open={updateTriggerDialogOpen}
+                  onClose={setUpdateTriggerDialogOpen}
+                />
+              </li>
             </ul>
-
-            <p>Sidebar</p>
 
             <Button color="rose" onClick={handleDeleteWorkflow}>
               Delete Workflow
