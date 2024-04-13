@@ -17,7 +17,7 @@ export default function WorkflowEditor({
   const nodeTypes = useMemo(
     () => ({
       workflowNode: WorkflowNode,
-      addNewNode: AddTriggerNode,
+      setTriggerButton: AddTriggerNode,
     }),
     [],
   );
@@ -70,7 +70,6 @@ function getProcessedNodes(hazelNodes: Array<HazelNode>): Array<Node> {
       position: { x: centerX, y: currentY },
       data: { ...node },
       type: 'workflowNode',
-      draggable: false,
       focusable: true,
       // deletable: false, TODO: Enable when we are handling this!
     });
@@ -79,12 +78,12 @@ function getProcessedNodes(hazelNodes: Array<HazelNode>): Array<Node> {
     currentY += stepY;
   }
 
-  // To allow user to add new nodes
+  // To allow user to set a trigger
   processedNodes.push({
-    id: 'add-new',
+    id: 'set-trigger',
     position: { x: centerX, y: currentY },
     data: null,
-    type: 'addNewNode',
+    type: 'setTriggerButton',
     draggable: false,
     focusable: true,
   });
