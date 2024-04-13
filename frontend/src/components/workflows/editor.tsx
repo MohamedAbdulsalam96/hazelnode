@@ -5,7 +5,7 @@ import ReactFlow, { Background, BackgroundVariant, Controls } from 'reactflow';
 import type { Edge, Node } from 'reactflow';
 
 import WorkflowNode from '@/components/nodes/node';
-import AddNewNode from '@/components/nodes/add-new-node';
+import { AddTriggerNode } from '@/components/nodes/add-trigger-node';
 import { useEditorStore } from '@/stores/workflow-editor';
 
 export default function WorkflowEditor({
@@ -17,7 +17,7 @@ export default function WorkflowEditor({
   const nodeTypes = useMemo(
     () => ({
       workflowNode: WorkflowNode,
-      addNewNode: AddNewNode,
+      addNewNode: AddTriggerNode,
     }),
     [],
   );

@@ -11,7 +11,7 @@ import { DocTypeQueryParams, useDocType } from '@/queries/frappe';
 import { Skeleton } from '../ui/skeleton';
 import { toast } from 'sonner';
 
-export default function AddNewNode() {
+export function AddTriggerNode() {
   const [showDialog, setShowDialog] = useState(false);
 
   const { useList } = useDocType<HazelNodeType>('Hazel Node Type');
