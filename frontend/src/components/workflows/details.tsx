@@ -4,6 +4,12 @@ import { useConfirm } from '@/hooks/confirm';
 import { useDocType } from '@/queries/frappe';
 import { useNavigate } from '@tanstack/react-router';
 
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from '@/components/ui/resizable';
+
 import { Route as WorkflowDetailsRoute } from '@/routes/workflow.$id';
 
 import WorkflowEditor from './editor';
@@ -48,18 +54,24 @@ export function WorkflowDetails() {
 
   return (
     <>
-      <div className="grid h-full w-full grid-cols-5 p-2">
-        <div className="col-span-2 border-r-2 border-r-zinc-200">
-          <pre>{JSON.stringify(workflowDoc.data, null, 2)}</pre>
-          <Button color="rose" onClick={handleDeleteWorkflow}>
-            Delete Workflow
-          </Button>
-        </div>
+      <div className="h-full w-full">
+        <ResizablePanelGroup direction="horizontal">
+          <ResizablePanel>
+              <WorkflowEditor hazelNodes={hazelNodes} />
+          </ResizablePanel>
+          <ResizableHandle />
+          <ResizablePanel>
+            Sidebar
+          </ResizablePanel>
+        </ResizablePanelGroup>
 
-        <div className="col-span-3">
-          <WorkflowEditor hazelNodes={hazelNodes} />
-        </div>
+
       </div>
     </>
   );
 }
+
+// LATER:
+// <Button color="rose" onClick={handleDeleteWorkflow}>
+//             Delete Workflow
+//  </Button>

@@ -36,9 +36,9 @@ export const Route = rootRouteWithContext<{
       </div>
       <hr />
 
-      <div className="py-2">
-        <Outlet />
-      </div>
+
+      <Outlet />
+
       <Toaster />
       <TanStackRouterDevtools position="bottom-left" />
       <ReactQueryDevtools buttonPosition="bottom-right" />
