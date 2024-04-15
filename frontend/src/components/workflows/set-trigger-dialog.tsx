@@ -11,6 +11,7 @@ import { type DialogProps as HeadlessDialogProps } from '@headlessui/react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { DocTypeQueryParams, useDocType } from '@/queries/frappe';
+import { useLoaderData } from '@tanstack/react-router';
 
 export default function SetTriggerDialog({
   open,
@@ -20,6 +21,10 @@ export default function SetTriggerDialog({
   onClose: (isOpen: boolean) => void;
 } & HeadlessDialogProps) {
   const { useList } = useDocType<HazelNodeType>('Hazel Node Type');
+
+  const { name: workflowName } = useLoaderData({
+    from: '/workflow/$id',
+  });
 
   const triggerListParams: DocTypeQueryParams<HazelNodeType> = {
     filters: {
@@ -37,7 +42,7 @@ export default function SetTriggerDialog({
   function setTrigger(trigger: HazelNodeType) {
     setValue.mutate(
       {
-        name: '26',
+        name: workflowName.toString(),
         values: {
           trigger_type: trigger.name,
         },
