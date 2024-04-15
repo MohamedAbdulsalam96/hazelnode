@@ -49,6 +49,7 @@ export default function SetTriggerDialog({
       },
       {
         onSuccess() {
+          // TODO: reload editor state
           onClose(false);
           toast.success('Trigger set successfully!');
         },
