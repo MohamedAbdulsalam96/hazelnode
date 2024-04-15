@@ -4,7 +4,7 @@ import { useEffect, useMemo } from 'react';
 import ReactFlow, { Background, BackgroundVariant, Controls } from 'reactflow';
 
 import WorkflowNode from '@/components/nodes/node';
-import { useEditorStore } from '@/stores/workflow-editor';
+import { useEditorStore } from '@/stores/editor';
 import { AddTriggerNode } from '@/components/nodes/add-trigger-node';
 import { getProcessedNodes, getProcessedEdges } from '@/utils/editor';
 
