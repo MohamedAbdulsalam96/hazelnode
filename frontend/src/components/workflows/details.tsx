@@ -55,35 +55,35 @@ export function WorkflowDetails() {
     );
   }
 
-  const hazelNodes = workflowDoc.data.nodes || [];
-
   return (
     <>
       <div className="h-full w-full">
         <ResizablePanelGroup direction="horizontal">
           <ResizablePanel defaultSize={80}>
-            <WorkflowEditor hazelNodes={hazelNodes} />
+            <WorkflowEditor hazelWorkflow={workflowDoc.data} />
           </ResizablePanel>
           <ResizableHandle withHandle />
           <ResizablePanel defaultSize={20}>
             <strong>{workflowDoc.data.title}</strong>
 
             <ul>
-              <li>
-                Trigger: {workflowDoc.data.trigger_type}{' '}
-                <Button
-                  plain={true}
-                  outline={true}
-                  onClick={() => setUpdateTriggerDialogOpen(true)}
-                >
-                  Change
-                </Button>
-                <SetTriggerDialog
-                  open={updateTriggerDialogOpen}
-                  onClose={setUpdateTriggerDialogOpen}
-                />
-              </li>
+              {workflowDoc.data.trigger_type && (
+                <li>
+                  Trigger: {workflowDoc.data.trigger_type}
+                  <Button
+                    onClick={() => setUpdateTriggerDialogOpen(true)}
+                    outline={true}
+                  >
+                    Change
+                  </Button>
+                </li>
+              )}
             </ul>
+
+            <SetTriggerDialog
+              open={updateTriggerDialogOpen}
+              onClose={setUpdateTriggerDialogOpen}
+            />
 
             <Button color="rose" onClick={handleDeleteWorkflow}>
               Delete Workflow

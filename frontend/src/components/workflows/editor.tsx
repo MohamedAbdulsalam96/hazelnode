@@ -1,17 +1,17 @@
 import 'reactflow/dist/style.css';
 
 import { useEffect, useMemo } from 'react';
-import ReactFlow, { Background, BackgroundVariant, Controls } from 'reactflow';
 import type { Edge, Node } from 'reactflow';
+import ReactFlow, { Background, BackgroundVariant, Controls } from 'reactflow';
 
 import WorkflowNode from '@/components/nodes/node';
 import { AddTriggerNode } from '@/components/nodes/add-trigger-node';
 import { useEditorStore } from '@/stores/workflow-editor';
 
 export default function WorkflowEditor({
-  hazelNodes,
+  hazelWorkflow,
 }: {
-  hazelNodes: Array<HazelNode>;
+  hazelWorkflow: HazelWorkflow;
 }) {
   // Registering custom node types
   const nodeTypes = useMemo(
@@ -32,10 +32,10 @@ export default function WorkflowEditor({
   }));
 
   useEffect(() => {
-    const processedNodes = getProcessedNodes(hazelNodes);
+    const processedNodes = getProcessedNodes(hazelWorkflow);
     editorStore.setNodes(processedNodes);
     editorStore.setEdges(getProcessedEdges(processedNodes));
-  }, [hazelNodes]);
+  }, [hazelWorkflow.nodes]);
 
   return (
     <ReactFlow
@@ -57,20 +57,21 @@ export default function WorkflowEditor({
   );
 }
 
-function getProcessedNodes(hazelNodes: Array<HazelNode>): Array<Node> {
+function getProcessedNodes(hazelWorkflow: HazelWorkflow): Array<Node> {
   const processedNodes: Array<Node<HazelNode | null>> = [];
 
   let currentY = 100;
   const stepY = 120;
   const centerX = 300;
 
-  for (const node of hazelNodes) {
+  for (const node of hazelWorkflow.nodes || []) {
     processedNodes.push({
       id: node.name,
       position: { x: centerX, y: currentY },
       data: { ...node },
       type: 'workflowNode',
       focusable: true,
+      draggable: false,
       // deletable: false, TODO: Enable when we are handling this!
     });
 
@@ -78,15 +79,17 @@ function getProcessedNodes(hazelNodes: Array<HazelNode>): Array<Node> {
     currentY += stepY;
   }
 
-  // To allow user to set a trigger
-  processedNodes.push({
-    id: 'set-trigger',
-    position: { x: centerX, y: currentY },
-    data: null,
-    type: 'setTriggerButton',
-    draggable: false,
-    focusable: true,
-  });
+  // To allow user to set a trigger if not already done
+  if (!hazelWorkflow.trigger_type) {
+    processedNodes.push({
+      id: 'set-trigger',
+      position: { x: centerX, y: currentY },
+      data: null,
+      type: 'setTriggerButton',
+      draggable: false,
+      focusable: true,
+    });
+  }
 
   return processedNodes;
 }
