@@ -1,8 +1,8 @@
 import { HazelNode } from './HazelNode'
 
 export interface HazelWorkflow{
+	name: number
 	creation: string
-	name: string
 	modified: string
 	owner: string
 	modified_by: string
