@@ -10,10 +10,12 @@ export interface HazelEventParam{
 	parentfield?: string
 	parenttype?: string
 	idx?: number
-	/**	Title : Data	*/
-	title: string
+	/**	Label : Data	*/
+	label: string
 	/**	Fieldtype : Select	*/
 	fieldtype: "Data" | "Check" | "Number" | "Date" | "Select" | "Link"
+	/**	Is Mandatory? : Check	*/
+	is_mandatory?: 0 | 1
 	/**	Fieldname : Data	*/
 	fieldname: string
 	/**	Options : Small Text	*/
