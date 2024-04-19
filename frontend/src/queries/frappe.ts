@@ -89,7 +89,7 @@ export function useDocumentList<DT>(
 }
 
 interface SetValueData<DT> {
-  name: string;
+  name: string | number;
   values: Partial<DT>;
 }
 
@@ -146,7 +146,7 @@ export function useDeleteDocMutation(doctype: DocTypeName) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (variables: { name: string }) => {
+    mutationFn: (variables: { name: string | number }) => {
       return makeRequest({
         type: 'document',
         method: 'DELETE',
