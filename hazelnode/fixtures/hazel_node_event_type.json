@@ -3,8 +3,8 @@
   "docstatus": 0,
   "doctype": "Hazel Node Event Type",
   "is_standard": 1,
-  "modified": "2024-02-24 19:51:13.858417",
-  "name": 2,
+  "modified": "2024-02-27 14:14:07.602599",
+  "name": 5,
   "node_type": "API Call",
   "params": [],
   "title": "POST"
@@ -13,8 +13,8 @@
   "docstatus": 0,
   "doctype": "Hazel Node Event Type",
   "is_standard": 1,
-  "modified": "2024-02-24 19:58:12.226786",
-  "name": 4,
+  "modified": "2024-02-27 14:14:07.692623",
+  "name": 6,
   "node_type": "Email",
   "params": [],
   "title": "Send Email"
@@ -23,18 +23,265 @@
   "docstatus": 0,
   "doctype": "Hazel Node Event Type",
   "is_standard": 1,
-  "modified": "2024-02-24 19:51:18.311440",
-  "name": 1,
+  "modified": "2024-02-27 14:14:07.727477",
+  "name": 7,
   "node_type": "API Call",
   "params": [
    {
     "fieldname": "url",
     "fieldtype": "Data",
+    "is_mandatory": 0,
+    "label": null,
     "options": null,
-    "parent": 1,
+    "parent": 7,
     "parentfield": "params",
-    "parenttype": "Hazel Node Event Type",
-    "title": "URL"
+    "parenttype": "Hazel Node Event Type"
+   }
+  ],
+  "title": "GET"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazel Node Event Type",
+  "is_standard": 1,
+  "modified": "2024-02-28 12:17:23.894357",
+  "name": 8,
+  "node_type": "API Call",
+  "params": [],
+  "title": "POST"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazel Node Event Type",
+  "is_standard": 1,
+  "modified": "2024-02-28 12:17:23.997315",
+  "name": 9,
+  "node_type": "Email",
+  "params": [],
+  "title": "Send Email"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazel Node Event Type",
+  "is_standard": 1,
+  "modified": "2024-02-28 12:17:24.032640",
+  "name": 10,
+  "node_type": "API Call",
+  "params": [
+   {
+    "fieldname": "url",
+    "fieldtype": "Data",
+    "is_mandatory": 0,
+    "label": null,
+    "options": null,
+    "parent": 10,
+    "parentfield": "params",
+    "parenttype": "Hazel Node Event Type"
+   }
+  ],
+  "title": "GET"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazel Node Event Type",
+  "is_standard": 1,
+  "modified": "2024-02-28 12:25:24.396970",
+  "name": 11,
+  "node_type": "API Call",
+  "params": [],
+  "title": "POST"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazel Node Event Type",
+  "is_standard": 1,
+  "modified": "2024-02-28 12:25:24.488274",
+  "name": 12,
+  "node_type": "Email",
+  "params": [],
+  "title": "Send Email"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazel Node Event Type",
+  "is_standard": 1,
+  "modified": "2024-02-28 12:25:24.542113",
+  "name": 13,
+  "node_type": "API Call",
+  "params": [
+   {
+    "fieldname": "url",
+    "fieldtype": "Data",
+    "is_mandatory": 0,
+    "label": null,
+    "options": null,
+    "parent": 13,
+    "parentfield": "params",
+    "parenttype": "Hazel Node Event Type"
+   }
+  ],
+  "title": "GET"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazel Node Event Type",
+  "is_standard": 1,
+  "modified": "2024-02-29 00:12:41.003598",
+  "name": 14,
+  "node_type": "API Call",
+  "params": [],
+  "title": "POST"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazel Node Event Type",
+  "is_standard": 1,
+  "modified": "2024-02-29 00:12:41.094939",
+  "name": 15,
+  "node_type": "Email",
+  "params": [],
+  "title": "Send Email"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazel Node Event Type",
+  "is_standard": 1,
+  "modified": "2024-02-29 00:12:41.127499",
+  "name": 16,
+  "node_type": "API Call",
+  "params": [
+   {
+    "fieldname": "url",
+    "fieldtype": "Data",
+    "is_mandatory": 0,
+    "label": null,
+    "options": null,
+    "parent": 16,
+    "parentfield": "params",
+    "parenttype": "Hazel Node Event Type"
+   }
+  ],
+  "title": "GET"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazel Node Event Type",
+  "is_standard": 1,
+  "modified": "2024-03-09 15:30:38.567431",
+  "name": 17,
+  "node_type": "API Call",
+  "params": [],
+  "title": "POST"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazel Node Event Type",
+  "is_standard": 1,
+  "modified": "2024-03-09 15:30:38.601633",
+  "name": 18,
+  "node_type": "Email",
+  "params": [],
+  "title": "Send Email"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazel Node Event Type",
+  "is_standard": 1,
+  "modified": "2024-03-09 15:30:38.634074",
+  "name": 19,
+  "node_type": "API Call",
+  "params": [
+   {
+    "fieldname": "url",
+    "fieldtype": "Data",
+    "is_mandatory": 0,
+    "label": null,
+    "options": null,
+    "parent": 19,
+    "parentfield": "params",
+    "parenttype": "Hazel Node Event Type"
+   }
+  ],
+  "title": "GET"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazel Node Event Type",
+  "is_standard": 1,
+  "modified": "2024-03-24 14:38:12.247936",
+  "name": 20,
+  "node_type": "API Call",
+  "params": [],
+  "title": "POST"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazel Node Event Type",
+  "is_standard": 1,
+  "modified": "2024-03-24 14:38:12.274968",
+  "name": 21,
+  "node_type": "Email",
+  "params": [],
+  "title": "Send Email"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazel Node Event Type",
+  "is_standard": 1,
+  "modified": "2024-03-24 14:38:12.299620",
+  "name": 22,
+  "node_type": "API Call",
+  "params": [
+   {
+    "fieldname": "url",
+    "fieldtype": "Data",
+    "is_mandatory": 0,
+    "label": null,
+    "options": null,
+    "parent": 22,
+    "parentfield": "params",
+    "parenttype": "Hazel Node Event Type"
+   }
+  ],
+  "title": "GET"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazel Node Event Type",
+  "is_standard": 1,
+  "modified": "2024-04-13 15:09:27.053554",
+  "name": 23,
+  "node_type": "API Call",
+  "params": [],
+  "title": "POST"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazel Node Event Type",
+  "is_standard": 1,
+  "modified": "2024-04-13 15:09:27.116257",
+  "name": 24,
+  "node_type": "Email",
+  "params": [],
+  "title": "Send Email"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazel Node Event Type",
+  "is_standard": 1,
+  "modified": "2024-04-13 15:09:27.157869",
+  "name": 25,
+  "node_type": "API Call",
+  "params": [
+   {
+    "fieldname": "url",
+    "fieldtype": "Data",
+    "is_mandatory": 0,
+    "label": null,
+    "options": null,
+    "parent": 25,
+    "parentfield": "params",
+    "parenttype": "Hazel Node Event Type"
    }
   ],
   "title": "GET"

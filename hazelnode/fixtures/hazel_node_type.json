@@ -6,112 +6,9 @@
   "handler_path": "hazelnode.nodes.actions.email_node.EmailNode",
   "is_standard": 1,
   "kind": "Action",
-  "modified": "2024-02-24 19:57:57.627821",
+  "modified": "2024-04-19 15:29:17.513812",
   "name": "Email",
-  "params": [
-   {
-    "fieldname": "recipient",
-    "fieldtype": "Data",
-    "options": null,
-    "parent": "Email",
-    "parentfield": "params",
-    "parenttype": "Hazel Node Type",
-    "title": "Recipient"
-   },
-   {
-    "fieldname": "body",
-    "fieldtype": "Data",
-    "options": null,
-    "parent": "Email",
-    "parentfield": "params",
-    "parenttype": "Hazel Node Type",
-    "title": "Body"
-   }
-  ],
-  "preview_image": null
- },
- {
-  "description": "Trigger a workflow on document lifecycle event.",
-  "docstatus": 0,
-  "doctype": "Hazel Node Type",
-  "handler_path": null,
-  "is_standard": 1,
-  "kind": "Trigger",
-  "modified": "2024-02-24 19:42:46.343266",
-  "name": "Document Event",
-  "params": [
-   {
-    "fieldname": "event",
-    "fieldtype": "Select",
-    "options": "New\nOn Change\nOn Delete",
-    "parent": "Document Event",
-    "parentfield": "params",
-    "parenttype": "Hazel Node Type",
-    "title": "Event"
-   },
-   {
-    "fieldname": "doctype",
-    "fieldtype": "Link",
-    "options": "DocType",
-    "parent": "Document Event",
-    "parentfield": "params",
-    "parenttype": "Hazel Node Type",
-    "title": "DocType"
-   }
-  ],
-  "preview_image": null
- },
- {
-  "description": "Listens to webhook events",
-  "docstatus": 0,
-  "doctype": "Hazel Node Type",
-  "handler_path": null,
-  "is_standard": 1,
-  "kind": "Trigger",
-  "modified": "2024-02-24 19:42:46.444650",
-  "name": "Webhook Listener",
-  "params": [
-   {
-    "fieldname": "webhook_id",
-    "fieldtype": "Data",
-    "options": null,
-    "parent": "Webhook Listener",
-    "parentfield": "params",
-    "parenttype": "Hazel Node Type",
-    "title": "Listener ID"
-   },
-   {
-    "fieldname": "use_secret",
-    "fieldtype": "Check",
-    "options": null,
-    "parent": "Webhook Listener",
-    "parentfield": "params",
-    "parenttype": "Hazel Node Type",
-    "title": "Secure with secret?"
-   }
-  ],
-  "preview_image": null
- },
- {
-  "description": null,
-  "docstatus": 0,
-  "doctype": "Hazel Node Type",
-  "handler_path": null,
-  "is_standard": 1,
-  "kind": "Trigger",
-  "modified": "2024-02-24 19:42:46.424285",
-  "name": "Schedule Event",
-  "params": [
-   {
-    "fieldname": "expression",
-    "fieldtype": "Data",
-    "options": null,
-    "parent": "Schedule Event",
-    "parentfield": "params",
-    "parenttype": "Hazel Node Type",
-    "title": "CRON expression"
-   }
-  ],
+  "params": [],
   "preview_image": null
  },
  {
@@ -123,6 +20,74 @@
   "kind": "Action",
   "modified": "2024-02-24 19:42:46.459082",
   "name": "API Call",
+  "params": [],
+  "preview_image": null
+ },
+ {
+  "description": null,
+  "docstatus": 0,
+  "doctype": "Hazel Node Type",
+  "handler_path": null,
+  "is_standard": 1,
+  "kind": "Trigger",
+  "modified": "2024-04-18 21:49:03.888239",
+  "name": "Schedule Event",
+  "params": [
+   {
+    "fieldname": "expression",
+    "fieldtype": "Data",
+    "is_mandatory": 1,
+    "label": "CRON Expression",
+    "options": null,
+    "parent": "Schedule Event",
+    "parentfield": "params",
+    "parenttype": "Hazel Node Type"
+   }
+  ],
+  "preview_image": null
+ },
+ {
+  "description": "Trigger a workflow on document lifecycle event.",
+  "docstatus": 0,
+  "doctype": "Hazel Node Type",
+  "handler_path": null,
+  "is_standard": 1,
+  "kind": "Trigger",
+  "modified": "2024-04-19 15:29:46.061265",
+  "name": "Document Event",
+  "params": [
+   {
+    "fieldname": "event",
+    "fieldtype": "Select",
+    "is_mandatory": 1,
+    "label": "Event",
+    "options": "New\nOn Change\nOn Delete",
+    "parent": "Document Event",
+    "parentfield": "params",
+    "parenttype": "Hazel Node Type"
+   },
+   {
+    "fieldname": "doctype",
+    "fieldtype": "Link",
+    "is_mandatory": 1,
+    "label": "DocType",
+    "options": "DocType",
+    "parent": "Document Event",
+    "parentfield": "params",
+    "parenttype": "Hazel Node Type"
+   }
+  ],
+  "preview_image": null
+ },
+ {
+  "description": "Listens to webhook events",
+  "docstatus": 0,
+  "doctype": "Hazel Node Type",
+  "handler_path": null,
+  "is_standard": 1,
+  "kind": "Trigger",
+  "modified": "2024-04-19 15:29:26.081216",
+  "name": "Webhook Listener",
   "params": [],
   "preview_image": null
  }
