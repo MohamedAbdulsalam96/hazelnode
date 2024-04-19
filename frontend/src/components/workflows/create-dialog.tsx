@@ -47,7 +47,7 @@ export default function CreateWorkflowDialog({
           navigate({
             to: '/workflow/$id',
             params: {
-              id: doc.name,
+              id: doc.name.toString(),
             },
           });
         },

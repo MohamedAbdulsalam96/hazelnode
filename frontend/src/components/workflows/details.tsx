@@ -20,6 +20,10 @@ import SetTriggerDialog from '@/components/workflows/set-trigger-dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '../ui/label';
 
+interface TriggerConfig {
+  [index: string]: string | undefined;
+}
+
 export function WorkflowDetails() {
   const params = WorkflowDetailsRoute.useParams();
   const navigate = useNavigate();
@@ -34,20 +38,21 @@ export function WorkflowDetails() {
 
   const { useDoc, useList } = useDocType<HazelNodeType>('Hazel Node Type');
   const actionsList = useList({
-    "fields": ["name", "description"],
-    "filters": {
-      "kind": "Action"
-    }
-  })
+    fields: ['name', 'description'],
+    filters: {
+      kind: 'Action',
+    },
+  });
 
   const triggerDoc = useDoc(workflowDoc.data?.trigger_type || '');
 
   const [updateTriggerDialogOpen, setUpdateTriggerDialogOpen] = useState(false);
 
-  const [triggerFormState, setTriggerFormState] = useState({});
+  const [triggerFormState, setTriggerFormState] = useState<TriggerConfig>({});
 
   useEffect(() => {
-    const initTriggerFormState = {};
+    const initTriggerFormState: TriggerConfig = {};
+
     const initConfig = JSON.parse(workflowDoc.data.trigger_config);
 
     if (triggerDoc.data) {
@@ -87,17 +92,19 @@ export function WorkflowDetails() {
   async function handleSaveWorkflow() {
     const triggerConfig = JSON.stringify(triggerFormState);
 
-    setValueWorkflowMutation.mutate({
-      "name": workflowDoc.data.name.toString(),
-      "values": {
-        "trigger_config": triggerConfig
-      }
-    }, {
-      onSuccess() {
-        toast.success("Workflow Saved!")
-      }
-    })
-
+    setValueWorkflowMutation.mutate(
+      {
+        name: workflowDoc.data.name.toString(),
+        values: {
+          trigger_config: triggerConfig,
+        },
+      },
+      {
+        onSuccess() {
+          toast.success('Workflow Saved!');
+        },
+      },
+    );
   }
 
   return (
@@ -159,13 +166,11 @@ export function WorkflowDetails() {
                 Delete Workflow
               </Button>
 
-              <h2 className=' text-xl font-bold text-gray-900 mt-4'>Actions</h2>
-              <div className='flex flex-col gap-2 mt-1'>
-              {actionsList.data?.map((node) => {
-                return <Button color="yellow">
-                  {node.name}
-                </Button>;
-              })}
+              <h2 className=" mt-4 text-xl font-bold text-gray-900">Actions</h2>
+              <div className="mt-1 flex flex-col gap-2">
+                {actionsList.data?.map((node) => {
+                  return <Button color="yellow">{node.name}</Button>;
+                })}
               </div>
             </ScrollArea>
           </ResizablePanel>
