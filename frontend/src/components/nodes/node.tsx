@@ -1,15 +1,25 @@
-import { PencilIcon } from 'lucide-react';
 import { Handle, NodeProps, Position, useOnSelectionChange } from 'reactflow';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
+import { useEditorStore } from '@/stores/editor';
 
-export default function WorkflowNode({ data, selected }: NodeProps<HazelNode>) {
+export interface EditorNodeData {
+  kind?: 'Action' | 'Trigger',
+  name: string,
+  type: string
+}
+
+export default function WorkflowNode({ data, selected }: NodeProps<EditorNodeData>) {
+  const editorStore = useEditorStore((state) => ({
+    setActiveAction: state.setActiveAction
+  }));
+
   useOnSelectionChange({
     onChange: ({ nodes }) => {
       for (const node of nodes) {
-        if (node.id === data.name) {
+        if (node.id === data.name && data.kind === "Action") {
           // do something when a node is selected
+          editorStore.setActiveAction(node)
         }
       }
     },
@@ -32,17 +42,8 @@ export default function WorkflowNode({ data, selected }: NodeProps<HazelNode>) {
                 {data.kind}
               </Badge>
             </CardTitle>
-            <Button onClick={() => {
-              // do something on edit click
-            }} plain>
-              <PencilIcon size={16} />
-            </Button>
           </div>
         </CardHeader>
-        {/* {selected && (
-          <CardContent>
-          </CardContent>
-        )} */}
       </Card>
       <Handle type="source" position={Position.Bottom} />
       <Handle type="target" position={Position.Top} />

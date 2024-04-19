@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { DocTypeQueryParams, useDocType } from '@/queries/frappe';
 import { useLoaderData } from '@tanstack/react-router';
+import { useEditorStore } from '@/stores/editor';
 
 export default function SetTriggerDialog({
   open,
@@ -21,6 +22,10 @@ export default function SetTriggerDialog({
   onClose: (isOpen: boolean) => void;
 } & HeadlessDialogProps) {
   const { useList } = useDocType<HazelNodeType>('Hazel Node Type');
+  const editorStore = useEditorStore((state) => ({
+    addNode: state.addNode,
+    removeNode: state.removeNode
+  }));
 
   const { name: workflowName } = useLoaderData({
     from: '/workflow/$id',
@@ -50,6 +55,12 @@ export default function SetTriggerDialog({
       {
         onSuccess() {
           // TODO: reload editor state
+          editorStore.removeNode(0);
+          editorStore.addNode({
+            "name": trigger.name,
+            "type": trigger.name,
+            "kind": "Trigger"
+          });
           onClose(false);
           toast.success('Trigger set successfully!');
         },

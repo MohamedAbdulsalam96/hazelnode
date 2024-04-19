@@ -8,9 +8,11 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { useConfirm } from '@/hooks/confirm';
 import { toast } from 'sonner';
+import { useEditorStore } from '@/stores/editor';
+import { EditorNodeData } from '../nodes/node';
 
 interface TriggerConfig {
-  [index: string]: string | undefined;
+  [index: string]: string;
 }
 
 export function WorkflowConfigPanel({
@@ -18,6 +20,12 @@ export function WorkflowConfigPanel({
 }: {
   hazelWorkflow: HazelWorkflow;
 }) {
+  const editorStore = useEditorStore((state) => ({
+    addNode: state.addNode,
+    nodes: state.nodes,
+    activeAction: state.activeAction,
+    setActiveAction: state.setActiveAction,
+  }));
   const { useDeleteDocMutation, useSetValueMutation } =
     useDocType<HazelWorkflow>('Hazel Workflow');
 
@@ -67,7 +75,7 @@ export function WorkflowConfigPanel({
 
     deleteWorkflowMutation.mutate(
       {
-        name: hazelWorkflow.name
+        name: hazelWorkflow.name,
       },
       {
         onSuccess: () => {
@@ -98,6 +106,32 @@ export function WorkflowConfigPanel({
     );
   }
 
+  function addAction(node: EditorNodeData) {
+    editorStore.addNode(node);
+
+    const serializedNodes = [];
+    for (const node of editorStore.nodes) {
+      const nodeData = node.data as EditorNodeData;
+
+      serializedNodes.push({
+        type: nodeData.type,
+      });
+    }
+
+    serializedNodes.push({
+      type: node.type,
+    });
+    // remove the first one, it is a trigger node
+    serializedNodes.splice(0, 1);
+
+    setValueWorkflowMutation.mutate({
+      name: hazelWorkflow.name,
+      values: {
+        nodes: serializedNodes as HazelNode[],
+      },
+    });
+  }
+
   return (
     <ScrollArea className="h-full p-3">
       <strong>{hazelWorkflow.title}</strong>
@@ -114,10 +148,9 @@ export function WorkflowConfigPanel({
           </li>
         )}
       </ul>
-
       {(triggerDoc.data?.params || []).map((param) => {
         return (
-          <div>
+          <div key={param.name}>
             <Label htmlFor={param.fieldname}>{param.label}</Label>
             <Input
               value={triggerFormState[param.fieldname]}
@@ -133,27 +166,44 @@ export function WorkflowConfigPanel({
           </div>
         );
       })}
-
       <SetTriggerDialog
         open={updateTriggerDialogOpen}
         onClose={setUpdateTriggerDialogOpen}
       />
-
       <Button color="white" onClick={handleSaveWorkflow}>
         Save
       </Button>
-
       <br />
       <Button color="rose" onClick={handleDeleteWorkflow}>
         Delete Workflow
       </Button>
-
-      <h2 className=" mt-4 text-xl font-bold text-gray-900">Actions</h2>
-      <div className="mt-1 flex flex-col gap-2">
-        {actionsList.data?.map((node) => {
-          return <Button color="yellow">{node.name}</Button>;
-        })}
-      </div>
+      {hazelWorkflow.trigger_type && (
+        <>
+          <h2 className=" mt-4 text-xl font-bold text-gray-900">Actions</h2>
+          <div className="mt-1 flex flex-col gap-2">
+            {actionsList.data?.map((node) => {
+              return (
+                <Button
+                  key={node.name}
+                  color="yellow"
+                  onClick={() =>
+                    addAction({
+                      name: node.name,
+                      type: node.name,
+                      kind: 'Action',
+                    })
+                  }
+                >
+                  {node.name}
+                </Button>
+              );
+            })}
+          </div>
+        </>
+      )}
+      <h2 className=" mt-4 text-xl font-bold text-gray-900">Action Settings</h2>
+      {editorStore.activeAction?.data.type} - #
+      {editorStore.activeAction?.data.name}
     </ScrollArea>
   );
 }
