@@ -8,9 +8,7 @@
   "title",
   "is_standard",
   "column_break_avcn",
-  "node_type",
-  "section_break_cjgk",
-  "params"
+  "node_type"
  ],
  "fields": [
   {
@@ -32,16 +30,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "section_break_cjgk",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "params",
-   "fieldtype": "Table",
-   "label": "Params",
-   "options": "Hazel Event Param"
-  },
-  {
    "default": "0",
    "fieldname": "is_standard",
    "fieldtype": "Check",
@@ -50,7 +38,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-02-24 19:50:58.923726",
+ "modified": "2024-04-22 22:53:47.356835",
  "modified_by": "Administrator",
  "module": "Hazelnode",
  "name": "Hazel Node Event Type",

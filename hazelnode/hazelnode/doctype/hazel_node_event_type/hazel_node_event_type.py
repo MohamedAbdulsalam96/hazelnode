@@ -14,14 +14,9 @@ class HazelNodeEventType(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 
-		from hazelnode.hazelnode.doctype.hazel_event_param.hazel_event_param import (
-			HazelEventParam,
-		)
-
 		is_standard: DF.Check
 		name: DF.Int | None
 		node_type: DF.Link
-		params: DF.Table[HazelEventParam]
 		title: DF.Data
 	# end: auto-generated types
 

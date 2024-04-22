@@ -30,11 +30,11 @@
   "handler_path": null,
   "is_standard": 1,
   "kind": "Trigger",
-  "modified": "2024-04-18 21:49:03.888239",
+  "modified": "2024-04-22 22:59:22.322994",
   "name": "Schedule Event",
   "params": [
    {
-    "fieldname": "expression",
+    "fieldname": "cron_expression",
     "fieldtype": "Data",
     "is_mandatory": 1,
     "label": "CRON Expression",

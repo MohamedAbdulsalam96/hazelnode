@@ -1,4 +1,3 @@
-import { HazelEventParam } from './HazelEventParam'
 
 export interface HazelNodeEventType{
 	name: number
@@ -17,6 +16,4 @@ export interface HazelNodeEventType{
 	is_standard?: 0 | 1
 	/**	Node Type : Link - Hazel Node Type	*/
 	node_type: string
-	/**	Params : Table - Hazel Event Param	*/
-	params?: HazelEventParam[]
 }

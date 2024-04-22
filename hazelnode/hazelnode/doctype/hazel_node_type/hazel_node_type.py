@@ -14,7 +14,7 @@ class HazelNodeType(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 
-		from hazelnode.hazelnode.doctype.hazel_event_param.hazel_event_param import (
+		from hazelnode.hazelnode.doctype.hazel_node_param.hazel_node_param import (
 			HazelEventParam,
 		)
 

@@ -46,7 +46,7 @@
    "fieldname": "params",
    "fieldtype": "Table",
    "label": "Params",
-   "options": "Hazel Event Param"
+   "options": "Hazel Node Param"
   },
   {
    "depends_on": "eval:doc.kind===\"Action\"",
@@ -70,7 +70,7 @@
    "link_fieldname": "node_type"
   }
  ],
- "modified": "2024-02-24 19:42:33.968764",
+ "modified": "2024-04-22 22:54:41.436584",
  "modified_by": "Administrator",
  "module": "Hazelnode",
  "name": "Hazel Node Type",
