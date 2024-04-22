@@ -7,6 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "label",
+  "event",
   "fieldtype",
   "is_mandatory",
   "column_break_fbww",
@@ -50,12 +51,20 @@
    "in_list_view": 1,
    "label": "Label",
    "reqd": 1
+  },
+  {
+   "description": "if left empty, shown for all types of events",
+   "fieldname": "event",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Event",
+   "options": "Hazel Node Event Type"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-04-18 21:40:06.569277",
+ "modified": "2024-04-22 23:04:54.454711",
  "modified_by": "Administrator",
  "module": "Hazelnode",
  "name": "Hazel Node Param",

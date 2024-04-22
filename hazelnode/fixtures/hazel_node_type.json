@@ -34,6 +34,7 @@
   "name": "Schedule Event",
   "params": [
    {
+    "event": null,
     "fieldname": "cron_expression",
     "fieldtype": "Data",
     "is_mandatory": 1,
@@ -57,6 +58,7 @@
   "name": "Document Event",
   "params": [
    {
+    "event": null,
     "fieldname": "event",
     "fieldtype": "Select",
     "is_mandatory": 1,
@@ -67,6 +69,7 @@
     "parenttype": "Hazel Node Type"
    },
    {
+    "event": null,
     "fieldname": "doctype",
     "fieldtype": "Link",
     "is_mandatory": 1,

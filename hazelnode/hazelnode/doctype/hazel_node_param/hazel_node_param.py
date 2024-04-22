@@ -14,6 +14,7 @@ class HazelNodeParam(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 
+		event: DF.Link | None
 		fieldname: DF.Data
 		fieldtype: DF.Literal[
 			'Data', 'Check', 'Number', 'Date', 'Select', 'Link'

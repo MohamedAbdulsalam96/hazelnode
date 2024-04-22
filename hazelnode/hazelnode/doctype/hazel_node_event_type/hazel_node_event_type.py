@@ -15,9 +15,9 @@ class HazelNodeEventType(Document):
 		from frappe.types import DF
 
 		is_standard: DF.Check
-		name: DF.Int | None
 		node_type: DF.Link
 		title: DF.Data
 	# end: auto-generated types
 
-	pass
+	def autoname(self):
+		self.name = f'{self.node_type}-{self.title}'
