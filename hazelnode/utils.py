@@ -19,7 +19,9 @@ def sync_hazel_scheduled_events():
 
 	for wf in workflows_with_scheduled_triggers:
 		trigger_config = frappe.parse_json(wf.trigger_config)
-		cron_expression = trigger_config['cron_expression']
+		cron_expression = trigger_config.get('cron_expression')
+		if not cron_expression:
+			continue
 		already_exists = frappe.db.exists(
 			'Hazel Scheduled Event',
 			{'cron_expression': cron_expression},
