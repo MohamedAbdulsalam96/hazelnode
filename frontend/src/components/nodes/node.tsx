@@ -4,22 +4,27 @@ import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { useEditorStore } from '@/stores/editor';
 
 export interface EditorNodeData {
-  kind?: 'Action' | 'Trigger',
-  name: string,
-  type: string
+  kind?: 'Action' | 'Trigger';
+  name: string;
+  type: string;
 }
 
-export default function WorkflowNode({ data, selected }: NodeProps<EditorNodeData>) {
+export default function WorkflowNode({
+  data,
+  selected,
+}: NodeProps<EditorNodeData>) {
   const editorStore = useEditorStore((state) => ({
-    setSelectedNode: state.setSelectedNode
+    setSelectedNode: state.setSelectedNode,
   }));
 
   useOnSelectionChange({
     onChange: ({ nodes }) => {
       for (const node of nodes) {
-        if (node.id === data.name && data.kind === "Action") {
+        if (node.id === data.name && data.kind === 'Action') {
           // do something when a node is selected
-          editorStore.setSelectedNode(node)
+          editorStore.setSelectedNode(node);
+        } else {
+          editorStore.setSelectedNode(null);
         }
       }
     },

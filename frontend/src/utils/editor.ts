@@ -31,7 +31,6 @@ export function getProcessedNodes(hazelWorkflow: HazelWorkflow): Array<Node> {
       type: 'workflowNode',
       draggable: false,
       focusable: false,
-      selectable: false
     })
   }
 

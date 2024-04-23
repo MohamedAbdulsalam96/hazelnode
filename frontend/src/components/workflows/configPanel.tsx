@@ -24,7 +24,6 @@ export function WorkflowConfigPanel({
     nodes: state.flowNodes,
     appendNode: state.appendNode,
     selectedNode: state.selectedNode,
-    setSelectedNode: state.setSelectedNode,
   }));
 
   const { useDeleteDocMutation, useSetValueMutation } =

@@ -17,7 +17,7 @@ interface WorkflowEditorActions {
   onFlowNodesChange: (changes: NodeChange[]) => void;
   onFlowEdgesChange: (changes: EdgeChange[]) => void;
   isFlowEmpty: () => boolean;
-  setSelectedNode: (actionNode: Node) => void;
+  setSelectedNode: (actionNode: Node | null) => void;
   removeNode: (index: number) => void;
   appendNode: (node: EditorNodeData) => void;
 }
@@ -56,7 +56,7 @@ export const useEditorStore = create<
   isFlowEmpty() {
     return get().flowNodes.length === 0;
   },
-  setSelectedNode(node: Node) {
+  setSelectedNode(node) {
     set({
       selectedNode: node,
     });
