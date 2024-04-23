@@ -19,6 +19,7 @@ class HazelNodeParam(Document):
 		fieldtype: DF.Literal[
 			'Data', 'Check', 'Number', 'Date', 'Select', 'Link'
 		]
+		is_computed: DF.Check
 		is_mandatory: DF.Check
 		label: DF.Data
 		options: DF.SmallText | None
