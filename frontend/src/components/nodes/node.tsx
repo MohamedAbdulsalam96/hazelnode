@@ -23,8 +23,10 @@ export default function WorkflowNode({
         if (node.id === data.name && data.kind === 'Action') {
           // do something when a node is selected
           editorStore.setSelectedNode(node);
-        } else {
+          break;
+        } else if (node.id === data.name && data.kind == 'Trigger') {
           editorStore.setSelectedNode(null);
+          break;
         }
       }
     },

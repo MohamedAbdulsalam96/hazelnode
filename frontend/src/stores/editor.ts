@@ -17,7 +17,7 @@ interface WorkflowEditorActions {
   onFlowNodesChange: (changes: NodeChange[]) => void;
   onFlowEdgesChange: (changes: EdgeChange[]) => void;
   isFlowEmpty: () => boolean;
-  setSelectedNode: (actionNode: Node | null) => void;
+  setSelectedNode: (node: Node | null) => void;
   removeNode: (index: number) => void;
   appendNode: (node: EditorNodeData) => void;
 }
