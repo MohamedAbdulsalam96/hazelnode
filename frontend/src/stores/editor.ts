@@ -1,53 +1,82 @@
 import { create } from 'zustand';
+
 import type { NodeChange, EdgeChange, Node, Edge } from 'reactflow';
 import { applyNodeChanges, applyEdgeChanges } from 'reactflow';
-import { getProcessedEdges, getProcessedNodes } from '@/utils/editor';
 import { EditorNodeData } from '@/components/nodes/node';
 
 interface WorkflowEditorState {
-  nodes: Array<Node>;
-  edges: Array<Edge>;
-  activeAction: Node | null;
-  setNodes: (nodes: Array<Node>) => void;
-  setEdges: (edges: Array<Edge>) => void;
-  onNodesChange: (changes: NodeChange[]) => void;
-  onEdgesChange: (changes: EdgeChange[]) => void;
-  syncWithWorkflowDoc: (workflowDoc: HazelWorkflow) => void;
-  addNode: (node: EditorNodeData) => void;
-  setActiveAction: (actionNode: Node) => void;
-  removeNode: (index: number) => void;
-  isFirstNode: () => boolean;
+  flowNodes: Array<Node>;
+  flowEdges: Array<Edge>;
+  activeWorkflow: HazelWorkflow | null;
+  selectedNode: Node | null;
 }
 
-export const useEditorStore = create<WorkflowEditorState>()((set, get) => ({
-  nodes: [],
-  edges: [],
-  activeAction: null,
-  setActiveAction(actionNode: Node) {
+interface WorkflowEditorActions {
+  setFlowNodes: (nodes: Array<Node>) => void;
+  setFlowEdges: (edges: Array<Edge>) => void;
+  onFlowNodesChange: (changes: NodeChange[]) => void;
+  onFlowEdgesChange: (changes: EdgeChange[]) => void;
+  isFlowEmpty: () => boolean;
+  setSelectedNode: (actionNode: Node) => void;
+  removeNode: (index: number) => void;
+  appendNode: (node: EditorNodeData) => void;
+}
+
+const initialState: WorkflowEditorState = {
+  flowNodes: [],
+  flowEdges: [],
+  activeWorkflow: null,
+  selectedNode: null,
+};
+
+export const useEditorStore = create<
+  WorkflowEditorState & WorkflowEditorActions
+>()((set, get) => ({
+  ...initialState,
+  setFlowNodes(nodes) {
     set({
-      activeAction: actionNode,
+      flowNodes: nodes,
     });
   },
-  setNodes(nodes) {
+  setFlowEdges(edges) {
     set({
-      nodes,
+      flowEdges: edges,
     });
   },
-  setEdges(edges) {
+  onFlowNodesChange(changes) {
     set({
-      edges,
+      flowNodes: applyNodeChanges(changes, get().flowNodes),
     });
   },
-  addNode(node: EditorNodeData) {
-    // create an edge between the new node and the last one
+  onFlowEdgesChange(changes) {
+    set({
+      flowEdges: applyEdgeChanges(changes, get().flowEdges),
+    });
+  },
+  isFlowEmpty() {
+    return get().flowNodes.length === 0;
+  },
+  setSelectedNode(node: Node) {
+    set({
+      selectedNode: node,
+    });
+  },
+  removeNode(index) {
+    const currentNodes = get().flowNodes;
+    currentNodes.splice(index, 1);
+
+    set({
+      flowNodes: [...currentNodes],
+    });
+  },
+  appendNode(node) {
     const currentState = get();
-    const currentNodes = currentState.nodes;
-    const currentEdges = currentState.edges;
-    const isFirstNode = get().isFirstNode();
+    const currentNodes = currentState.flowNodes;
+    const currentEdges = currentState.flowEdges;
 
     const newNode: Node = {
       id: node.name,
-      position: {x: 300, y: 100},
+      position: { x: 300, y: 100 },
       data: {
         name: node.name,
         type: node.type,
@@ -56,8 +85,7 @@ export const useEditorStore = create<WorkflowEditorState>()((set, get) => ({
       type: 'workflowNode',
     };
 
-
-    if (!isFirstNode) {
+    if (!get().isFlowEmpty()) {
       // connect to the already existing last one
       const lastNode = currentNodes[currentNodes.length - 1];
       const newEdge = {
@@ -69,42 +97,13 @@ export const useEditorStore = create<WorkflowEditorState>()((set, get) => ({
 
       const updatedEdges = [...currentEdges, newEdge];
       set({
-        edges: updatedEdges,
+        flowEdges: updatedEdges,
       });
       newNode.position.y = lastNode.position.y + 120;
     }
 
     set({
-      nodes: [...currentNodes, newNode],
-    });
-  },
-  isFirstNode() {
-    return get().nodes.length === 0;
-  },
-  removeNode(index: number) {
-    const currentNodes = get().nodes;
-    currentNodes.splice(index, 1);
-
-    set({
-      nodes: [...currentNodes],
-    });
-  },
-  onNodesChange(changes: NodeChange[]) {
-    set({
-      nodes: applyNodeChanges(changes, get().nodes),
-    });
-  },
-  onEdgesChange(changes: EdgeChange[]) {
-    set({
-      edges: applyEdgeChanges(changes, get().edges),
-    });
-  },
-  syncWithWorkflowDoc(workflowDoc: HazelWorkflow) {
-    const nodes = getProcessedNodes(workflowDoc);
-    const edges = getProcessedEdges(nodes);
-    set({
-      nodes,
-      edges,
+      flowNodes: [...currentNodes, newNode],
     });
   },
 }));

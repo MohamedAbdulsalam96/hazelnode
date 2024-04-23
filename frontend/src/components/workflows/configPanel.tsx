@@ -21,11 +21,12 @@ export function WorkflowConfigPanel({
   hazelWorkflow: HazelWorkflow;
 }) {
   const editorStore = useEditorStore((state) => ({
-    addNode: state.addNode,
-    nodes: state.nodes,
-    activeAction: state.activeAction,
-    setActiveAction: state.setActiveAction,
+    nodes: state.flowNodes,
+    appendNode: state.appendNode,
+    selectedNode: state.selectedNode,
+    setSelectedNode: state.setSelectedNode,
   }));
+
   const { useDeleteDocMutation, useSetValueMutation } =
     useDocType<HazelWorkflow>('Hazel Workflow');
 
@@ -107,7 +108,7 @@ export function WorkflowConfigPanel({
   }
 
   function addAction(node: EditorNodeData) {
-    editorStore.addNode(node);
+    editorStore.appendNode(node);
 
     const serializedNodes = [];
     for (const node of editorStore.nodes) {
@@ -202,8 +203,8 @@ export function WorkflowConfigPanel({
         </>
       )}
       <h2 className=" mt-4 text-xl font-bold text-gray-900">Action Settings</h2>
-      {editorStore.activeAction?.data.type} - #
-      {editorStore.activeAction?.data.name}
+      {editorStore.selectedNode?.data.type} - #
+      {editorStore.selectedNode?.data.name}
     </ScrollArea>
   );
 }

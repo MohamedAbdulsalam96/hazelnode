@@ -23,7 +23,7 @@ export default function SetTriggerDialog({
 } & HeadlessDialogProps) {
   const { useList } = useDocType<HazelNodeType>('Hazel Node Type');
   const editorStore = useEditorStore((state) => ({
-    addNode: state.addNode,
+    appendNode: state.appendNode,
     removeNode: state.removeNode
   }));
 
@@ -56,7 +56,7 @@ export default function SetTriggerDialog({
         onSuccess() {
           // TODO: reload editor state
           editorStore.removeNode(0);
-          editorStore.addNode({
+          editorStore.appendNode({
             "name": trigger.name,
             "type": trigger.name,
             "kind": "Trigger"

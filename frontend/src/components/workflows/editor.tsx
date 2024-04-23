@@ -23,12 +23,12 @@ export default function WorkflowEditor({
   );
 
   const editorStore = useEditorStore((state) => ({
-    nodes: state.nodes,
-    edges: state.edges,
-    onNodesChange: state.onNodesChange,
-    onEdgesChange: state.onEdgesChange,
-    setNodes: state.setNodes,
-    setEdges: state.setEdges,
+    nodes: state.flowNodes,
+    edges: state.flowEdges,
+    onNodesChange: state.onFlowNodesChange,
+    onEdgesChange: state.onFlowEdgesChange,
+    setNodes: state.setFlowNodes,
+    setEdges: state.setFlowEdges,
   }));
 
   useEffect(() => {

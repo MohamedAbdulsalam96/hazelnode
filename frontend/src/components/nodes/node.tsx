@@ -11,7 +11,7 @@ export interface EditorNodeData {
 
 export default function WorkflowNode({ data, selected }: NodeProps<EditorNodeData>) {
   const editorStore = useEditorStore((state) => ({
-    setActiveAction: state.setActiveAction
+    setSelectedNode: state.setSelectedNode
   }));
 
   useOnSelectionChange({
@@ -19,7 +19,7 @@ export default function WorkflowNode({ data, selected }: NodeProps<EditorNodeDat
       for (const node of nodes) {
         if (node.id === data.name && data.kind === "Action") {
           // do something when a node is selected
-          editorStore.setActiveAction(node)
+          editorStore.setSelectedNode(node)
         }
       }
     },
