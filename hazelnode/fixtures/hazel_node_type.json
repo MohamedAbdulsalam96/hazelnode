@@ -54,20 +54,9 @@
   "handler_path": null,
   "is_standard": 1,
   "kind": "Trigger",
-  "modified": "2024-04-19 15:29:46.061265",
+  "modified": "2024-04-23 07:01:02.069773",
   "name": "Document Event",
   "params": [
-   {
-    "event": null,
-    "fieldname": "event",
-    "fieldtype": "Select",
-    "is_mandatory": 1,
-    "label": "Event",
-    "options": "New\nOn Change\nOn Delete",
-    "parent": "Document Event",
-    "parentfield": "params",
-    "parenttype": "Hazel Node Type"
-   },
    {
     "event": null,
     "fieldname": "doctype",

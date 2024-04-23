@@ -3,6 +3,24 @@
   "docstatus": 0,
   "doctype": "Hazel Node Event Type",
   "is_standard": 1,
+  "modified": "2024-04-22 23:12:04.927136",
+  "name": "API Call-POST",
+  "node_type": "API Call",
+  "title": "POST"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazel Node Event Type",
+  "is_standard": 1,
+  "modified": "2024-04-23 06:59:15.608369",
+  "name": "Document Event-On Update",
+  "node_type": "Document Event",
+  "title": "On Update"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazel Node Event Type",
+  "is_standard": 1,
   "modified": "2024-04-22 23:08:52.121030",
   "name": "API Call-GET",
   "node_type": "API Call",

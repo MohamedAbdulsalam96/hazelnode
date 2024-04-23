@@ -133,7 +133,7 @@ export function WorkflowConfigPanel({
   }
 
   return (
-    <ScrollArea className="h-full p-3">
+    <ScrollArea  className="h-full p-3">
       <strong>{hazelWorkflow.title}</strong>
       <ul>
         {hazelWorkflow.trigger_type && (
