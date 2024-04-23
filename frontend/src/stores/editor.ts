@@ -20,6 +20,7 @@ interface WorkflowEditorActions {
   setSelectedNode: (node: Node | null) => void;
   removeNode: (index: number) => void;
   appendNode: (node: EditorNodeData) => void;
+  resetFlows: () => void;
 }
 
 const initialState: WorkflowEditorState = {
@@ -33,6 +34,13 @@ export const useEditorStore = create<
   WorkflowEditorState & WorkflowEditorActions
 >()((set, get) => ({
   ...initialState,
+  resetFlows() {
+    set({
+      flowNodes: [],
+      flowEdges: [],
+      selectedNode: null
+    });
+  },
   setFlowNodes(nodes) {
     set({
       flowNodes: nodes,

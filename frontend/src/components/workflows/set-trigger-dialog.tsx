@@ -24,7 +24,8 @@ export default function SetTriggerDialog({
   const { useList } = useDocType<HazelNodeType>('Hazel Node Type');
   const editorStore = useEditorStore((state) => ({
     appendNode: state.appendNode,
-    removeNode: state.removeNode
+    removeNode: state.removeNode,
+    resetFlows: state.resetFlows
   }));
 
   const { name: workflowName } = useLoaderData({
@@ -54,8 +55,7 @@ export default function SetTriggerDialog({
       },
       {
         onSuccess() {
-          // TODO: reload editor state
-          editorStore.removeNode(0);
+          editorStore.resetFlows();
           editorStore.appendNode({
             "name": trigger.name,
             "type": trigger.name,
