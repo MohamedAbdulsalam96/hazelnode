@@ -23,7 +23,7 @@ class HazelNodeParam(Document):
 		is_mandatory: DF.Check
 		label: DF.Data
 		options: DF.SmallText | None
-		parent: DF.Data
+		parent: DFf.Data
 		parentfield: DF.Data
 		parenttype: DF.Data
 	# end: auto-generated types
